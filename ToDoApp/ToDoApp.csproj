@@ -170,8 +170,8 @@
   <ItemGroup>
     <FileAssociation Include=".todo">
       <Visible>False</Visible>
-      <Description>File extension for the todo app.</Description>
-      <Progid>ToDO</Progid>
+      <Description>ToDo file.</Description>
+      <Progid>ToDo</Progid>
       <DefaultIcon>Files\fileicon.png</DefaultIcon>
     </FileAssociation>
   </ItemGroup>
