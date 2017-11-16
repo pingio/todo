@@ -7,25 +7,26 @@ using System.Windows.Input;
 
 namespace ToDoApp
 {
-				class CommandViewModel : ICommand
-				{
-								private Action action;
-								private bool canExecute;
+	class CommandViewModel : ICommand
+	{
+		private Action action;
+		private bool canExecute;
 
-								public CommandViewModel(Action act, bool canExecute){
-												this.action = act;
-												this.canExecute = canExecute;
-								}
+		public CommandViewModel(Action act, bool canExecute)
+		{
+			this.action = act;
+			this.canExecute = canExecute;
+		}
 
-								public event EventHandler CanExecuteChanged;
+		public event EventHandler CanExecuteChanged;
 
-								public bool CanExecute(object parameter)
-								{
-												return canExecute;
-								}
+		public bool CanExecute(object parameter)
+		{
+			return canExecute;
+		}
 
-								public void Execute(object parameter) => this.action();
-				}
+		public void Execute(object parameter) => this.action();
+	}
 
 
 }

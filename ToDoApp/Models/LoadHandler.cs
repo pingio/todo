@@ -9,27 +9,29 @@ using System.Threading.Tasks;
 
 namespace ToDoApp
 {
-				class LoadHandler
-				{
-								private string filePath;
-								public LoadHandler(string path) => this.filePath = path;
+	class LoadHandler
+	{
+		private string filePath;
+		public LoadHandler(string path) => this.filePath = path;
 
-								public TodoFile LoadFile(string path = null){
+		public TodoFile LoadFile(string path = null)
+		{
 
-												if (String.IsNullOrEmpty(path)) path = filePath;
+			if (String.IsNullOrEmpty(path)) path = filePath;
 
-												string fileContents = File.ReadAllText(path);
+			string fileContents = File.ReadAllText(path);
 
-												Debug.WriteLine(fileContents);
+			Debug.WriteLine(fileContents);
 
-												TodoFile file = JsonConvert.DeserializeObject<TodoFile>(fileContents);
+			TodoFile file = JsonConvert.DeserializeObject<TodoFile>(fileContents);
 
-												return file;
-								}
+			return file;
+		}
 
-								public TodoFile NewFile(){
-												return new TodoFile();
-								}
-				
-				}
+		public TodoFile NewFile()
+		{
+			return new TodoFile();
+		}
+
+	}
 }

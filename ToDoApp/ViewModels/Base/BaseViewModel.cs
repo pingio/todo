@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ToDoApp
-{			
-				[AddINotifyPropertyChangedInterface]
-				class BaseViewModel : INotifyPropertyChanged
-				{
-								public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
-				}
+{
+	[AddINotifyPropertyChangedInterface]
+	class BaseViewModel : INotifyPropertyChanged
+	{
+		public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
+	}
 }
