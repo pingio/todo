@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoApp"
         mc:Ignorable="d"
-        Title="TodoApp" MinHeight="400" Height="400" Width="600"
-								Background="#eee">
+        Title="TodoApp" MinHeight="400" Height="400" Width="600" Background="#eee"
+		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<i:InvokeCommandAction Command="{Binding WindowLoaded}"/>
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+	
+	
 	<Window.Resources>
 		<Style x:Key="Input" TargetType="TextBox">
 			<Setter Property="VerticalAlignment" Value="Stretch"/>

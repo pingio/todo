@@ -37,6 +37,22 @@ namespace ToDoApp
 
 		#endregion
 
+		#region onLoad
+		private ICommand windowLoaded;
+		public ICommand WindowLoaded
+		{
+			get
+			{
+				return windowLoaded ?? (windowLoaded = new CommandViewModel(() => WindowLoadedCommand(), canExecute));
+			}
+		}
+
+		private void WindowLoadedCommand()
+		{
+			//UpdateContent(PropertyHandler.Instance.CurrentFilePath);
+		}
+		#endregion
+
 		#region Buttons
 		#region OpenButton
 

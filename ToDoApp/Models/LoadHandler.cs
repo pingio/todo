@@ -18,12 +18,19 @@ namespace ToDoApp
 		{
 
 			if (String.IsNullOrEmpty(path)) path = filePath;
+			TodoFile file = null;
 
-			string fileContents = File.ReadAllText(path);
+			try
+			{
+				string fileContents = File.ReadAllText(path);
 
-			Debug.WriteLine(fileContents);
+				file = JsonConvert.DeserializeObject<TodoFile>(fileContents);
+			}
+			catch (FileNotFoundException)
+			{
+				file = NewFile();
+			}
 
-			TodoFile file = JsonConvert.DeserializeObject<TodoFile>(fileContents);
 
 			return file;
 		}

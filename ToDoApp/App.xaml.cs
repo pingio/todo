@@ -9,22 +9,23 @@ namespace ToDoApp
 	/// </summary>
 	public partial class App : Application
 	{
-		public void Application_Startup(object sender, StartupEventArgs e)
-		{
-			if (e.Args.Length > 0)
+		private void Application_Startup(object sender, StartupEventArgs e)
+		{ 
+			if (AppDomain.CurrentDomain.SetupInformation.ActivationArguments != null
+				&& AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData != null
+				&& AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData.Length > 0)
 			{
-				PropertyHandler.Instance.CurrentFile = new LoadHandler(e.Args[0]).LoadFile();
-				PropertyHandler.Instance.CurrentFilePath = e.Args[0];
-			}
 
+				Uri uri = new Uri(AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData[0]);
+				PropertyHandler.Instance.CurrentFilePath = uri.LocalPath;
+				PropertyHandler.Instance.CurrentFile = new LoadHandler(PropertyHandler.Instance.CurrentFilePath).LoadFile();
+			}
 			else
 			{
-				PropertyHandler.Instance.CurrentFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\newfile.todo";
+				PropertyHandler.Instance.CurrentFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\new file.todo";
 				PropertyHandler.Instance.CurrentFile = new LoadHandler(PropertyHandler.Instance.CurrentFilePath).NewFile();
-
 			}
-
-		}
-
+		
+	}
 	}
 }
