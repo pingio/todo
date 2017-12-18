@@ -7,18 +7,18 @@ using System.Windows.Input;
 
 namespace ToDoApp
 {
-	class CommandViewModel : ICommand
+	class RelayCommand : ICommand
 	{
 		private Action action;
 		private bool canExecute;
 
-		public CommandViewModel(Action act, bool canExecute)
+		public RelayCommand(Action act, bool canExecute)
 		{
 			this.action = act;
 			this.canExecute = canExecute;
 		}
 
-		public event EventHandler CanExecuteChanged;
+		public event EventHandler CanExecuteChanged = (sender, e) => { };
 
 		public bool CanExecute(object parameter)
 		{

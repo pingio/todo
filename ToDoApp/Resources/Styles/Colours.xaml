@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ToDoApp.Resources.Styles">
+
+	<!-- Background -->
+	<Color x:Key="BackgroundLightColour">#eee</Color>
+	<SolidColorBrush x:Key="BackgroundLightThemeColourBrush" Color="{StaticResource BackgroundLightThemeColour}" />
+
+	<Color x:Key="BackgroundDarkColour">#212121</Color>
+	<SolidColorBrush x:Key="BackgroundDarkThemeColourBrush" Color="{StaticResource BackgroundLightThemeColour}" />
+	<!-- End Background -->
+
+	<!-- Font -->
+	<Color x:Key="FontLightColour">#eee</Color>
+	<SolidColorBrush x:Key="FontLightColourBrush" Color="{StaticResource FontLightColour}" />
+
+	<Color x:Key="FontDarkColour">#212121</Color>
+	<SolidColorBrush x:Key="FontDarkColourBrush" Color="{StaticResource FontDarkColour}" />
+	<!-- End Font -->
+
+
+</ResourceDictionary>

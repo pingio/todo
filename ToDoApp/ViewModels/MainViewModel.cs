@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace ToDoApp
 {
@@ -25,6 +26,7 @@ namespace ToDoApp
 
 		public MainViewModel()
 		{
+			
 			canExecute = true;
 			file = PropertyHandler.Instance.CurrentFile;
 
@@ -32,25 +34,8 @@ namespace ToDoApp
 			this.planned = file.Planned;
 			this.ideas = file.Ideas;
 
-
 		}
 
-		#endregion
-
-		#region onLoad
-		private ICommand windowLoaded;
-		public ICommand WindowLoaded
-		{
-			get
-			{
-				return windowLoaded ?? (windowLoaded = new CommandViewModel(() => WindowLoadedCommand(), canExecute));
-			}
-		}
-
-		private void WindowLoadedCommand()
-		{
-			//UpdateContent(PropertyHandler.Instance.CurrentFilePath);
-		}
 		#endregion
 
 		#region Buttons
@@ -62,7 +47,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return openButton ?? (openButton = new CommandViewModel(() => OpenButtonCommand(), canExecute));
+				return openButton ?? (openButton = new RelayCommand(() => OpenButtonCommand(), canExecute));
 			}
 		}
 
@@ -87,7 +72,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return saveButton ?? (saveButton = new CommandViewModel(() => SaveButtonCommand(), canExecute));
+				return saveButton ?? (saveButton = new RelayCommand(() => SaveButtonCommand(), canExecute));
 			}
 		}
 
@@ -105,9 +90,7 @@ namespace ToDoApp
 
 			if (fileDialog.ShowDialog() == true)
 			{
-				PropertyHandler.Instance.CurrentFile.InProgress = InProgressText;
-				PropertyHandler.Instance.CurrentFile.Planned = PlannedText;
-				PropertyHandler.Instance.CurrentFile.Ideas = IdeasText;
+				SaveText();
 				bool isSaved = new SaveHandler(PropertyHandler.Instance.CurrentFile).Save(fileDialog.FileName);
 
 			}
@@ -120,7 +103,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return settingsButton ?? (settingsButton = new CommandViewModel(() => SettingsButtonCommand(), canExecute));
+				return settingsButton ?? (settingsButton = new RelayCommand(() => SettingsButtonCommand(), canExecute));
 			}
 		}
 
@@ -128,13 +111,15 @@ namespace ToDoApp
 
 		private void SettingsButtonCommand()
 		{
-
+			SaveText();
+			WindowViewModel.Instance.CurrentPage = AppPage.Settings;
 		}
 		#endregion
 
 		#endregion
 
 		#region Text
+		public int FontSize => Properties.Settings.Default.FontSize;
 
 		public String PathText { get; set; } = PropertyHandler.Instance.CurrentFilePath;
 
@@ -185,13 +170,23 @@ namespace ToDoApp
 		{
 			PropertyHandler.Instance.CurrentFile = new LoadHandler(path).LoadFile();
 			PropertyHandler.Instance.CurrentFilePath = path;
-			PathText = path;
 
+			LoadText();
+		}
+
+		private void LoadText()
+		{
 			InProgressText = PropertyHandler.Instance.CurrentFile.InProgress;
 			PlannedText = PropertyHandler.Instance.CurrentFile.Planned;
 			IdeasText = PropertyHandler.Instance.CurrentFile.Ideas;
+			PathText = PropertyHandler.Instance.CurrentFilePath;
+		}
 
-
+		private void SaveText()
+		{
+			PropertyHandler.Instance.CurrentFile.InProgress = InProgressText;
+			PropertyHandler.Instance.CurrentFile.Planned = PlannedText;
+			PropertyHandler.Instance.CurrentFile.Ideas = IdeasText;
 		}
 
 		#endregion

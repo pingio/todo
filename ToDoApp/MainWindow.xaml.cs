@@ -9,8 +9,10 @@ namespace ToDoApp
 	{
 		public MainWindow()
 		{
-			this.DataContext = new MainViewModel();
-			InitializeComponent();
+			WindowViewModel wvm = new WindowViewModel();
+
+			this.DataContext = wvm;
+
 		}
 	}
 }

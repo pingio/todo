@@ -12,5 +12,7 @@ namespace ToDoApp
 	class BaseViewModel : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
+
+		public BaseViewModel ViewModel { get; set; }
 	}
 }
