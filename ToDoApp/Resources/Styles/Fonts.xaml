@@ -7,20 +7,24 @@
 	<Style TargetType="{x:Type Control}" x:Key="BaseStyle">
 		<Setter Property="FontFamily" Value="{StaticResource PlexMedium}" />
 		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="{StaticResource FontDarkColourBrush}"/>
 	</Style>
 
 	<Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
 		<Setter Property="FontFamily" Value="{StaticResource PlexMedium}" />
 		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="{StaticResource FontDarkColourBrush}"/>
 	</Style>
 
 	<Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource BaseStyle}">
 		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="{StaticResource FontDarkColourBrush}"/>
 	</Style>
 
 	<Style TargetType="{x:Type Label}">
 		<Setter Property="FontFamily" Value="{StaticResource PlexBold}"/>
 		<Setter Property="FontWeight" Value="Bold"/>
+		<Setter Property="Foreground" Value="{StaticResource FontDarkColourBrush}"/>
 	</Style>
 
 

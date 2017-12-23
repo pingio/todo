@@ -3,12 +3,10 @@
 <!--#region TextBox-->
 	<Style x:Key="Input" TargetType="{x:Type TextBox}"  BasedOn="{StaticResource BaseStyle}">
 		<Setter Property="VerticalAlignment" Value="Stretch"/>
-		<Setter Property="Margin" Value="0 2"/>
 		<Setter Property="AcceptsReturn" Value="True"/>
 		<Setter Property="AcceptsTab" Value="True"/>
 		<Setter Property="TextWrapping" Value="Wrap"/>
 		<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-		<Setter Property="Margin" Value="5 0"/>
 	</Style>
 	<!--#endregion-->
 	<!--#region TextBlock-->
@@ -85,7 +83,18 @@
 		<Setter Property="Margin" Value="0 0 15 0"/>
 	</Style>
 	<!--#endregion-->
-	
+
+	<Style x:Key="NoteGroupBorder" TargetType="{x:Type Border}">
+
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="BorderBrush" Value="{StaticResource BackgroundDarkThemeColourBrush}"/>
+		<Setter Property="Width" Value="300"/>
+		<Setter Property="MinWidth" Value="300"/>
+		<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Setter Property="Background" Value="White"/>
+		<Setter Property="Margin" Value="0 0 5 0"/>
+	</Style>
+
 
 
 </ResourceDictionary>
