@@ -5,55 +5,91 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ToDoApp"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
-      Title="TodoApp" Background="#eee">
-
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="TodoApp" Background="White">
 
 	<DockPanel>
-		<Grid Margin="10 5">
+		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="40"/>
 			</Grid.RowDefinitions>
-			<Grid Grid.Row="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="40"/>
-					<RowDefinition Height="*"/>
-				</Grid.RowDefinitions>
+			<Grid Grid.Row="0" Margin="5">
+				<ListView ItemsSource="{Binding NoteGroups}" BorderThickness="0">
+					<ListView.ItemContainerStyle>
+						<Style TargetType="{x:Type ListViewItem}">
+							<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+							<Setter Property="VerticalContentAlignment" Value="Stretch"/>
 
-				<!-- First grid -->
-				<TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource Header}" Text="In Progress"/>
-				<TextBox Grid.Column="0" Grid.Row="1" Style="{StaticResource Input}" x:Name="InProgressBox" Text="{Binding InProgressText}" FontSize="{Binding FontSize}"/>
-
-
-				<!-- Second grid -->
-				<TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource Header}" Text="Planned"/>
-				<TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource Input}" x:Name="PlannedBox" Text="{Binding PlannedText}" FontSize="{Binding FontSize}"/>
-
-				<!-- Third grid -->
-				<TextBlock Grid.Column="2" Grid.Row="0" Style="{StaticResource Header}" Text="Ideas" />
-				<TextBox VerticalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Style="{StaticResource Input}" x:Name="IdeasBox" Text="{Binding IdeasText}" FontSize="{Binding FontSize}"/>
+							<Setter Property="Background" Value="Transparent" />
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type ListViewItem}">
+										<ContentPresenter />
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</ListView.ItemContainerStyle>
+					<ListView.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+						</ItemsPanelTemplate>
+					</ListView.ItemsPanel>
+					<ListView.ItemTemplate >
+						<DataTemplate>
+							<Border Style="{StaticResource NoteGroupBorder}">
+								<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+									<StackPanel HorizontalAlignment="Stretch" >
+										<Border BorderBrush="{StaticResource BackgroundDarkThemeColourBrush}" BorderThickness="0 0 0 1">
+											<TextBlock Style="{StaticResource Header}" HorizontalAlignment="Center" Text="{Binding Title}"/>
+										</Border>
+									</StackPanel>
+									<ListView ItemsSource="{Binding GetNoteItems}" BorderThickness="0">
+										<ListView.ItemContainerStyle>
+											<Style TargetType="{x:Type ListViewItem}">
+												<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+												<Setter Property="Background" Value="Transparent" />
+												<Setter Property="Template">
+													<Setter.Value>
+														<ControlTemplate TargetType="{x:Type ListViewItem}">
+															<ContentPresenter />
+														</ControlTemplate>
+													</Setter.Value>
+												</Setter>
+											</Style>
+										</ListView.ItemContainerStyle>
+										<ListView.ItemTemplate>
+											<DataTemplate>
+												<StackPanel HorizontalAlignment="Stretch">
+													<TextBox Style="{StaticResource Input}" Text="{Binding ShortString}">
+													</TextBox>
+												</StackPanel>
+											</DataTemplate>
+										</ListView.ItemTemplate>
+									</ListView>
+								</StackPanel>
+							</Border>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
 
 				<!-- footer-->
 			</Grid>
-			<Grid Margin="0 5" Grid.Row="1">
+			<Grid Grid.Row="1" Background="{StaticResource BackgroundLightThemeColourBrush}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="190"/>
+					<ColumnDefinition Width="270"/>
 				</Grid.ColumnDefinitions>
 
 				
-				<DockPanel Grid.Column="0">
+				<DockPanel Grid.Column="0" Margin="5 0 0 0">
 					<TextBlock MaxHeight="25" Padding="2.5" Text="Path:" VerticalAlignment="Center"/>
 					<TextBox IsEnabled="False" Height="25" Padding="2.5" Margin="5 0 8 0" VerticalContentAlignment="Center" Text="{Binding PathText, Mode=OneWay, FallbackValue='Test'}"/>
 				</DockPanel>
-				<DockPanel Margin="0 0 0 0" Grid.Column="1" LastChildFill="False" HorizontalAlignment="Left">
+				<DockPanel Margin="0 0 5 0" Grid.Column="1" LastChildFill="False" HorizontalAlignment="Left">
 					<Button Content="{Binding OpenButtonText, FallbackValue='Open..'}" x:Name="OpenButton" Style="{StaticResource Button}" Command="{Binding OpenButton}"/>
+					<Button Content="{Binding SaveAsButtonText, FallbackValue='Save as..'}" x:Name="SaveAsButton" Style="{StaticResource SaveButton}" Command="{Binding SaveAsButton}"/>
 					<Button Content="{Binding SaveButtonText, FallbackValue='Save'}" x:Name="SaveButton" Style="{StaticResource SaveButton}" Command="{Binding SaveButton}"/>
 					<Button Content="{Binding SettingsButtonText, FallbackValue='Settings'}" x:Name="SettingsButton" Style="{StaticResource Button}" Command="{Binding SettingsButton}"/>
 				</DockPanel>

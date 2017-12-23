@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp", "ToDoApp\ToDoApp.csproj", "{09E775F6-1367-4F8E-8D3D-00B7F0BF1E9A}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TodoSetup", "TodoSetup\TodoSetup.vdproj", "{FFC0EC52-FFB2-4DC1-9F7B-21576F57F264}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +15,6 @@ Global
 		{09E775F6-1367-4F8E-8D3D-00B7F0BF1E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09E775F6-1367-4F8E-8D3D-00B7F0BF1E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09E775F6-1367-4F8E-8D3D-00B7F0BF1E9A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FFC0EC52-FFB2-4DC1-9F7B-21576F57F264}.Debug|Any CPU.ActiveCfg = Debug
-		{FFC0EC52-FFB2-4DC1-9F7B-21576F57F264}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

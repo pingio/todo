@@ -22,6 +22,7 @@ namespace ToDoApp
 			try
 			{
 				File.WriteAllText(path, jsonSave);
+				PropertyHandler.Instance.CurrentFilePath = path;
 				return true;
 			}
 
