@@ -28,8 +28,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>0.0.1.5</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -139,12 +139,8 @@
     <Compile Include="Converters\AppPageConverter.cs" />
     <Compile Include="Converters\BaseValueConverter.cs" />
     <Compile Include="Models\AppPage.cs" />
-    <Compile Include="Models\NoteGroup.cs" />
-    <Compile Include="Models\NoteItem.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModelOld.cs" />
     <Compile Include="Models\PropertyHandler.cs" />
     <Compile Include="Models\LoadHandler.cs" />
     <Compile Include="Models\SaveHandler.cs" />
@@ -183,8 +179,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsPage.xaml">
       <SubType>Designer</SubType>

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -19,28 +18,22 @@ namespace ToDoApp
 		#region Constructor
 
 		private bool canExecute;
-		private ObservableCollection<NoteGroup> noteGroups;
+		private TodoFile file;
+		private string inProgress;
+		private string planned;
+		private string ideas;
 
 
 		public MainViewModel()
 		{
-			canExecute = true;
-			var noteGroup1 = new NoteGroup("test");
-			noteGroup1.AddNoteItem(new NoteItem("test"));
-			noteGroup1.AddNoteItem(new NoteItem("test2"));
-
-			var noteGroup2 = new NoteGroup("test");
-			noteGroup2.AddNoteItem(new NoteItem("test"));
-			noteGroup2.AddNoteItem(new NoteItem("test2"));
-
-			noteGroup2.AddNoteItem(new NoteItem("test2"));
-			noteGroups = new ObservableCollection<NoteGroup>
-			{
-				noteGroup1,
-				noteGroup2,
-				new NoteGroup("test54")
 			
-			};
+			canExecute = true;
+			file = PropertyHandler.Instance.CurrentFile;
+
+			this.inProgress = file.InProgress;
+			this.planned = file.Planned;
+			this.ideas = file.Ideas;
+
 		}
 
 		#endregion
@@ -87,25 +80,6 @@ namespace ToDoApp
 
 		private void SaveButtonCommand()
 		{
-				SaveText();
-				bool isSaved = new SaveHandler(PropertyHandler.Instance.CurrentFile).Save(PropertyHandler.Instance.CurrentFilePath);
-		}
-		#endregion
-
-		#region Save  Button
-		private ICommand saveAsButton;
-		public ICommand SaveAsButton
-		{
-			get
-			{
-				return saveAsButton ?? (saveAsButton = new RelayCommand(() => SaveAsButtonCommand(), canExecute));
-			}
-		}
-
-		public String SaveAsButtonText { get; set; } = "Save as...";
-
-		private void SaveAsButtonCommand()
-		{
 			SaveFileDialog fileDialog = new SaveFileDialog();
 			fileDialog.Filter = "ToDo files (*.todo)|*.todo|All files (*.*)|*.*";
 
@@ -118,9 +92,6 @@ namespace ToDoApp
 			{
 				SaveText();
 				bool isSaved = new SaveHandler(PropertyHandler.Instance.CurrentFile).Save(fileDialog.FileName);
-				
-				if (isSaved)
-					PathText = PropertyHandler.Instance.CurrentFilePath;
 
 			}
 		}
@@ -148,10 +119,48 @@ namespace ToDoApp
 		#endregion
 
 		#region Text
+		public int FontSize => Properties.Settings.Default.FontSize;
+
 		public String PathText { get; set; } = PropertyHandler.Instance.CurrentFilePath;
 
-		public ObservableCollection<NoteGroup> NoteGroups => noteGroups;
+		public String InProgressText
+		{
+			get
+			{
+				return this.inProgress;
+			}
 
+			set
+			{
+				this.inProgress = value;
+			}
+		}
+
+		public String PlannedText
+		{
+			get
+			{
+				return this.planned;
+			}
+
+			set
+			{
+				this.planned = value;
+			}
+		}
+
+		public String IdeasText
+		{
+			get
+			{
+				return this.ideas;
+			}
+
+			set
+			{
+				this.ideas = value;
+			}
+		}
 
 		#endregion
 
@@ -167,14 +176,19 @@ namespace ToDoApp
 
 		private void LoadText()
 		{
-				
+			InProgressText = PropertyHandler.Instance.CurrentFile.InProgress;
+			PlannedText = PropertyHandler.Instance.CurrentFile.Planned;
+			IdeasText = PropertyHandler.Instance.CurrentFile.Ideas;
+			PathText = PropertyHandler.Instance.CurrentFilePath;
 		}
 
 		private void SaveText()
 		{
+			PropertyHandler.Instance.CurrentFile.InProgress = InProgressText;
+			PropertyHandler.Instance.CurrentFile.Planned = PlannedText;
+			PropertyHandler.Instance.CurrentFile.Ideas = IdeasText;
 		}
 
-		public int FontSize => Properties.Settings.Default.FontSize;
 		#endregion
 	}
 }
