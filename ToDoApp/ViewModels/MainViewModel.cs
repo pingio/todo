@@ -20,32 +20,27 @@ namespace ToDoApp
 
 		private bool canExecute;
 		private ObservableCollection<NoteGroup> noteGroups;
+		private Dictionary<string, NoteGroup> noteGroupKeys;
 
 
 		public MainViewModel()
 		{
 			canExecute = true;
-			var noteGroup1 = new NoteGroup("test");
-			noteGroup1.AddNoteItem(new NoteItem("test"));
-			noteGroup1.AddNoteItem(new NoteItem("test2"));
 
-			var noteGroup2 = new NoteGroup("test");
-			noteGroup2.AddNoteItem(new NoteItem("test"));
-			noteGroup2.AddNoteItem(new NoteItem("test2"));
+			noteGroupKeys = new Dictionary<string, NoteGroup>();
+			noteGroups = new ObservableCollection<NoteGroup>();
 
-			noteGroup2.AddNoteItem(new NoteItem("test2"));
-			noteGroups = new ObservableCollection<NoteGroup>
-			{
-				noteGroup1,
-				noteGroup2,
-				new NoteGroup("test54")
-			
-			};
+			NoteGroups = noteGroups;
+
+			LoadText();
 		}
 
 		#endregion
 
 		#region Buttons
+
+		#region FileButtons
+
 		#region OpenButton
 
 
@@ -54,7 +49,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return openButton ?? (openButton = new RelayCommand(() => OpenButtonCommand(), canExecute));
+				return openButton ?? (openButton = new RelayCommand(param => OpenButtonCommand(), canExecute));
 			}
 		}
 
@@ -79,7 +74,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return saveButton ?? (saveButton = new RelayCommand(() => SaveButtonCommand(), canExecute));
+				return saveButton ?? (saveButton = new RelayCommand(param => SaveButtonCommand(), canExecute));
 			}
 		}
 
@@ -87,18 +82,19 @@ namespace ToDoApp
 
 		private void SaveButtonCommand()
 		{
-				SaveText();
-				bool isSaved = new SaveHandler(PropertyHandler.Instance.CurrentFile).Save(PropertyHandler.Instance.CurrentFilePath);
+			SaveText();
+			bool isSaved = new SaveHandler(PropertyHandler.Instance.CurrentFile).Save(PropertyHandler.Instance.CurrentFilePath);
+			Debug.WriteLine(isSaved);
 		}
 		#endregion
 
-		#region Save  Button
+		#region Save As Button
 		private ICommand saveAsButton;
 		public ICommand SaveAsButton
 		{
 			get
 			{
-				return saveAsButton ?? (saveAsButton = new RelayCommand(() => SaveAsButtonCommand(), canExecute));
+				return saveAsButton ?? (saveAsButton = new RelayCommand(param => SaveAsButtonCommand(), canExecute));
 			}
 		}
 
@@ -118,7 +114,7 @@ namespace ToDoApp
 			{
 				SaveText();
 				bool isSaved = new SaveHandler(PropertyHandler.Instance.CurrentFile).Save(fileDialog.FileName);
-				
+
 				if (isSaved)
 					PathText = PropertyHandler.Instance.CurrentFilePath;
 
@@ -132,7 +128,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return settingsButton ?? (settingsButton = new RelayCommand(() => SettingsButtonCommand(), canExecute));
+				return settingsButton ?? (settingsButton = new RelayCommand(param => SettingsButtonCommand(), canExecute));
 			}
 		}
 
@@ -147,10 +143,77 @@ namespace ToDoApp
 
 		#endregion
 
-		#region Text
+		#region NoteButtons
+
+		#region AddNoteGroupButton
+		private ICommand addNoteGroupButton;
+		public ICommand AddNoteGroupButton
+		{
+			get
+			{
+				return addNoteGroupButton ?? (addNoteGroupButton = new RelayCommand(param => AddNoteGroupCommand(), canExecute));
+			}
+		}
+
+		private void AddNoteGroupCommand()
+		{
+			var newNoteGroup = new NoteGroup("New Note Group");
+
+			NoteGroups.Add(newNoteGroup);
+			noteGroupKeys[newNoteGroup.ID] = newNoteGroup;
+		}
+
+		#endregion
+
+		#region RemoveNoteGroupButton
+
+		private ICommand removeNoteGroupButton;
+		public ICommand RemoveNoteGroupButton
+		{
+			get
+			{
+				return removeNoteGroupButton ?? (removeNoteGroupButton = new RelayCommand(param => RemoveNoteGroupCommand(param), canExecute));
+			}
+		}
+
+		private void RemoveNoteGroupCommand(object param)
+		{
+			var noteGroup = GetNoteGroup(param.ToString());
+			NoteGroups.Remove(noteGroup);
+			noteGroupKeys.Remove(param.ToString());
+
+		}
+
+		#endregion
+
+		#region AddNoteItemButton
+
+		private ICommand addNoteItemButton;
+		public ICommand AddNoteItemButton
+		{
+			get
+			{
+				return addNoteItemButton ?? (addNoteItemButton = new RelayCommand(param => AddNoteItemCommand(param), canExecute));
+			}
+		}
+
+		private void AddNoteItemCommand(object param)
+		{
+			var noteGroup = GetNoteGroup(param.ToString());
+
+			noteGroup.AddNoteItem(new NoteItem("Hello."));
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
+
+		#region Content
 		public String PathText { get; set; } = PropertyHandler.Instance.CurrentFilePath;
 
-		public ObservableCollection<NoteGroup> NoteGroups => noteGroups;
+		public ObservableCollection<NoteGroup> NoteGroups { get; set; }
 
 
 		#endregion
@@ -159,6 +222,7 @@ namespace ToDoApp
 
 		private void UpdateContent(string path)
 		{
+
 			PropertyHandler.Instance.CurrentFile = new LoadHandler(path).LoadFile();
 			PropertyHandler.Instance.CurrentFilePath = path;
 
@@ -167,14 +231,29 @@ namespace ToDoApp
 
 		private void LoadText()
 		{
-				
+
+			PathText = PropertyHandler.Instance.CurrentFilePath;
+			NoteGroups = PropertyHandler.Instance.CurrentFile.NoteGroups;
+			foreach (NoteGroup n in NoteGroups ?? Enumerable.Empty<NoteGroup>())
+			{
+				noteGroupKeys[n.ID] = n;
+			}
 		}
 
 		private void SaveText()
 		{
+			PropertyHandler.Instance.CurrentFile.NoteGroups = NoteGroups;
+			Debug.WriteLine(NoteGroups.Count);
 		}
 
 		public int FontSize => Properties.Settings.Default.FontSize;
+
+
+		public NoteGroup GetNoteGroup(string id)
+		{
+			return noteGroupKeys[id];
+		}
 		#endregion
+
 	}
 }

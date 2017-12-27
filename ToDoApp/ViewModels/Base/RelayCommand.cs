@@ -9,10 +9,10 @@ namespace ToDoApp
 {
 	class RelayCommand : ICommand
 	{
-		private Action action;
+		private Action<object> action;
 		private bool canExecute;
 
-		public RelayCommand(Action act, bool canExecute)
+		public RelayCommand(Action<object> act, bool canExecute)
 		{
 			this.action = act;
 			this.canExecute = canExecute;
@@ -25,7 +25,7 @@ namespace ToDoApp
 			return canExecute;
 		}
 
-		public void Execute(object parameter) => this.action();
+		public void Execute(object parameter) => this.action(parameter);
 	}
 
 

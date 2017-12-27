@@ -21,7 +21,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return mainPageButton ?? (mainPageButton = new RelayCommand(() => MainPageButtonCommand(), canExecute));
+				return mainPageButton ?? (mainPageButton = new RelayCommand(param => MainPageButtonCommand(), canExecute));
 			}
 		}
 
@@ -41,7 +41,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return saveSettingsButton ?? (saveSettingsButton = new RelayCommand(() => SaveSettingsButtonCommand(), canExecute));
+				return saveSettingsButton ?? (saveSettingsButton = new RelayCommand(param => SaveSettingsButtonCommand(), canExecute));
 			}
 		}
 

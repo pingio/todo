@@ -20,7 +20,7 @@
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="40"/>
 				</Grid.RowDefinitions>
-				<TextBlock Grid.Row="0" Style="{StaticResource Header}" Text="Settings"/>
+				<TextBox IsReadOnly="True" Grid.Row="0" Style="{StaticResource Header}" Text="Settings"/>
 				<StackPanel Grid.Row="1">
 					<Label FontSize="16" Content="List Font Size"/>
 					<ComboBox ItemsSource="{Binding FontSizeList}" SelectedItem="{Binding FontSizeSelected}" HorizontalAlignment="Left" Margin="20 0 0 0" IsReadOnly="True"/>

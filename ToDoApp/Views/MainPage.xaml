@@ -15,64 +15,71 @@
 				<RowDefinition Height="40"/>
 			</Grid.RowDefinitions>
 			<Grid Grid.Row="0" Margin="5">
-				<ListView ItemsSource="{Binding NoteGroups}" BorderThickness="0">
-					<ListView.ItemContainerStyle>
-						<Style TargetType="{x:Type ListViewItem}">
-							<Setter Property="HorizontalContentAlignment" Value="Stretch" />
-							<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+				<DockPanel LastChildFill="False">
+					<ListView Name="NoteGroupList" ItemsSource="{Binding NoteGroups}" BorderThickness="0">
+						<ListView.ItemContainerStyle>
+							<Style TargetType="{x:Type ListViewItem}">
+								<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+								<Setter Property="VerticalContentAlignment" Value="Stretch"/>
 
-							<Setter Property="Background" Value="Transparent" />
-							<Setter Property="Template">
-								<Setter.Value>
-									<ControlTemplate TargetType="{x:Type ListViewItem}">
-										<ContentPresenter />
-									</ControlTemplate>
-								</Setter.Value>
-							</Setter>
-						</Style>
-					</ListView.ItemContainerStyle>
-					<ListView.ItemsPanel>
-						<ItemsPanelTemplate>
-							<StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-						</ItemsPanelTemplate>
-					</ListView.ItemsPanel>
-					<ListView.ItemTemplate >
-						<DataTemplate>
-							<Border Style="{StaticResource NoteGroupBorder}">
-								<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-									<StackPanel HorizontalAlignment="Stretch" >
-										<Border BorderBrush="{StaticResource BackgroundDarkThemeColourBrush}" BorderThickness="0 0 0 1">
-											<TextBlock Style="{StaticResource Header}" HorizontalAlignment="Center" Text="{Binding Title}"/>
-										</Border>
+								<Setter Property="Background" Value="Transparent" />
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="{x:Type ListViewItem}">
+											<ContentPresenter />
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</ListView.ItemContainerStyle>
+						<ListView.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+							</ItemsPanelTemplate>
+						</ListView.ItemsPanel>
+						<ListView.ItemTemplate >
+							<DataTemplate>
+								<Border Style="{StaticResource NoteGroupBorder}">
+									<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+										<StackPanel HorizontalAlignment="Stretch" >
+											<Border BorderBrush="{StaticResource BackgroundDarkThemeColourBrush}" BorderThickness="0 0 0 1">
+												<DockPanel>
+													<Button DockPanel.Dock="Left" Content="+" Style="{StaticResource Button}" Command="{Binding ElementName=NoteGroupList, Path=DataContext.AddNoteItemButton}" CommandParameter="{Binding ID}"/>
+													<Button DockPanel.Dock="Right" Content="-" Style="{StaticResource Button}" Command="{Binding ElementName=NoteGroupList, Path=DataContext.RemoveNoteGroupButton}" CommandParameter="{Binding ID}"/>
+													<TextBox Style="{StaticResource Header}" HorizontalAlignment="Center" Text="{Binding Title}"/>
+												</DockPanel>
+											</Border>
+										</StackPanel>
+										<ListView ItemsSource="{Binding GetNoteItems}" BorderThickness="0">
+											<ListView.ItemContainerStyle>
+												<Style TargetType="{x:Type ListViewItem}">
+													<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+													<Setter Property="Background" Value="Transparent" />
+													<Setter Property="Template">
+														<Setter.Value>
+															<ControlTemplate TargetType="{x:Type ListViewItem}">
+																<ContentPresenter />
+															</ControlTemplate>
+														</Setter.Value>
+													</Setter>
+												</Style>
+											</ListView.ItemContainerStyle>
+											<ListView.ItemTemplate>
+												<DataTemplate>
+													<StackPanel HorizontalAlignment="Stretch">
+														<TextBox Style="{StaticResource Input}" Text="{Binding ShortString}">
+														</TextBox>
+													</StackPanel>
+												</DataTemplate>
+											</ListView.ItemTemplate>
+										</ListView>
 									</StackPanel>
-									<ListView ItemsSource="{Binding GetNoteItems}" BorderThickness="0">
-										<ListView.ItemContainerStyle>
-											<Style TargetType="{x:Type ListViewItem}">
-												<Setter Property="HorizontalContentAlignment" Value="Stretch" />
-												<Setter Property="Background" Value="Transparent" />
-												<Setter Property="Template">
-													<Setter.Value>
-														<ControlTemplate TargetType="{x:Type ListViewItem}">
-															<ContentPresenter />
-														</ControlTemplate>
-													</Setter.Value>
-												</Setter>
-											</Style>
-										</ListView.ItemContainerStyle>
-										<ListView.ItemTemplate>
-											<DataTemplate>
-												<StackPanel HorizontalAlignment="Stretch">
-													<TextBox Style="{StaticResource Input}" Text="{Binding ShortString}">
-													</TextBox>
-												</StackPanel>
-											</DataTemplate>
-										</ListView.ItemTemplate>
-									</ListView>
-								</StackPanel>
-							</Border>
-						</DataTemplate>
-					</ListView.ItemTemplate>
-				</ListView>
+								</Border>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+					<Button Content="+" Style="{StaticResource Button}" Margin="0 2" VerticalAlignment="Top" Command="{Binding AddNoteGroupButton}"></Button>
+				</DockPanel>
 
 				<!-- footer-->
 			</Grid>
@@ -82,7 +89,7 @@
 					<ColumnDefinition Width="270"/>
 				</Grid.ColumnDefinitions>
 
-				
+
 				<DockPanel Grid.Column="0" Margin="5 0 0 0">
 					<TextBlock MaxHeight="25" Padding="2.5" Text="Path:" VerticalAlignment="Center"/>
 					<TextBox IsEnabled="False" Height="25" Padding="2.5" Margin="5 0 8 0" VerticalContentAlignment="Center" Text="{Binding PathText, Mode=OneWay, FallbackValue='Test'}"/>

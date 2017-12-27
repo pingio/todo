@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 namespace ToDoApp
 {
@@ -7,14 +8,22 @@ namespace ToDoApp
 		private Dictionary<string, NoteItem> noteItems;
 		private ObservableCollection<NoteItem> noteItemPositions;
 
-		public NoteGroup(string title)
+		public NoteGroup(string title, string id = null)
 		{
 			Title = title;
+
+			if (string.IsNullOrEmpty(id))
+				ID = Guid.NewGuid().ToString();
+			else
+				ID = id;
+
 			noteItems = new Dictionary<string, NoteItem>();
 			noteItemPositions = new ObservableCollection<NoteItem>();
 		}
 
 		public string Title { get; set; }
+
+		public string ID { get; set; }
 
 		#region NoteItems
 		public void AddNoteItem(NoteItem item)
