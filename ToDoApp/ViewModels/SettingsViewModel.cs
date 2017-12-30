@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Input;
 
 namespace ToDoApp
 {
-    class SettingsViewModel : BaseViewModel
-    {
+	class SettingsViewModel : BaseViewModel
+	{
 		#region private fields
 		private bool canExecute = true;
 		#endregion

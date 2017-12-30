@@ -1,44 +1,39 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ToDoApp
 {
-				class LoadHandler
-				{
-								private string filePath;
-								public LoadHandler(string path) => this.filePath = path;
+	class LoadHandler
+	{
+		private string filePath;
+		public LoadHandler(string path) => this.filePath = path;
 
-								public TodoFile LoadFile(string path = null)
-								{
+		public TodoFile LoadFile(string path = null)
+		{
 
-												if (String.IsNullOrEmpty(path)) path = filePath;
-												TodoFile file = null;
+			if (String.IsNullOrEmpty(path)) path = filePath;
+			TodoFile file = null;
 
-												try
-												{
-																string fileContents = File.ReadAllText(path);
+			try
+			{
+				string fileContents = File.ReadAllText(path);
 
-																file = JsonConvert.DeserializeObject<TodoFile>(fileContents);
-												}
-												catch (FileNotFoundException)
-												{
-																file = NewFile();
-												}
+				file = JsonConvert.DeserializeObject<TodoFile>(fileContents);
+			}
+			catch (FileNotFoundException)
+			{
+				file = NewFile();
+			}
 
 
-												return file;
-								}
+			return file;
+		}
 
-								public TodoFile NewFile()
-								{
-												return new TodoFile();
-								}
+		public TodoFile NewFile()
+		{
+			return new TodoFile();
+		}
 
-				}
+	}
 }

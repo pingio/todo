@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoApp"
         mc:Ignorable="d"
-        Title="{Binding CurrentTitle, FallbackValue='ToDo - Main'}" MinHeight="600" MinWidth="1000" Height="600" Width="950">
+        Title="{Binding CurrentTitle, FallbackValue='ToDo - Main'}" MinHeight="600" MinWidth="970" Height="600" Width="970">
 
 	<Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage, Converter={local:AppPageConverter}}"/>
 </Window>

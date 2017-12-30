@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+
 namespace ToDoApp
 {
 	class NoteGroup
@@ -34,11 +36,8 @@ namespace ToDoApp
 
 		public void RemoveNoteItem(string id)
 		{
-			if (ExistsNoteItem(id))
-			{
-				noteItems.Remove(id);
-				noteItemPositions.Remove(GetNoteItem(id));
-			}
+			noteItems.Remove(id);
+			noteItemPositions.Remove(noteItemPositions.SingleOrDefault(i => i.ID.Equals(id)));
 		}
 
 		public NoteItem GetNoteItem(string id)
@@ -79,5 +78,7 @@ namespace ToDoApp
 			}
 		}
 		#endregion
+
+
 	}
 }

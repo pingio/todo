@@ -37,12 +37,13 @@
 		<Setter Property="Padding" Value="5 2"/>
 		<Setter Property="Margin" Value="3 0"/>
 		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="Foreground" Value="{StaticResource FontDarkColourBrush}"/>
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type Button}">
 					<Border Background="{TemplateBinding Background}" BorderThickness="1px" BorderBrush="#FF707070">
-						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" MaxHeight="25" Margin="{TemplateBinding Padding}" />
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" MaxHeight="25" Margin="{TemplateBinding Padding}"/>
 					</Border>
 
 				</ControlTemplate>
@@ -96,8 +97,8 @@
 	</Style>
 	<!--#endregion-->
 
+	<!--#region NoteGroupBorder-->
 	<Style x:Key="NoteGroupBorder" TargetType="{x:Type Border}">
-
 		<Setter Property="BorderThickness" Value="1"/>
 		<Setter Property="BorderBrush" Value="{StaticResource BackgroundDarkThemeColourBrush}"/>
 		<Setter Property="Width" Value="300"/>
@@ -105,8 +106,39 @@
 		<Setter Property="HorizontalAlignment" Value="Left"/>
 		<Setter Property="Background" Value="White"/>
 		<Setter Property="Margin" Value="0 0 5 0"/>
+		<Setter Property="CornerRadius" Value="5"/>
+	</Style>
+	<!--#endregion-->
+
+	<!--#region Font Awesome Icons-->
+	<Style TargetType="{x:Type Button}" x:Key="Icon">
+		<Setter Property="Height" Value="25"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Opacity" Value="0.7"/>
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border Background="{TemplateBinding Background}"  BorderThickness="0" BorderBrush="Transparent">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" MaxHeight="25" Margin="{TemplateBinding Padding}" />
+					</Border>
+
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+
+		<Style.Triggers>
+			<Trigger Property="IsPressed" Value="True">
+				<Setter Property="Opacity" Value="1"/>
+			</Trigger>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Opacity" Value="1"/>
+			</Trigger>
+		</Style.Triggers>
+		
 	</Style>
 
+	<!--#endregion-->
 
 
 </ResourceDictionary>

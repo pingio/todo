@@ -1,6 +1,6 @@
 ﻿namespace ToDoApp
 {
-				class FileSettings
-				{
-				}
+	class FileSettings
+	{
+	}
 }

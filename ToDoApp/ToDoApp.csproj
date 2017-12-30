@@ -28,8 +28,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>0.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -112,6 +112,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>fileicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DeltaCompressionDotNet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=1d14d6e5194e7f4a, processorArchitecture=MSIL">
       <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.dll</HintPath>
@@ -122,8 +125,8 @@
     <Reference Include="DeltaCompressionDotNet.PatchApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3e8888ee913ed789, processorArchitecture=MSIL">
       <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.PatchApi.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.dll</HintPath>
@@ -158,9 +161,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -180,7 +180,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\AppPageConverter.cs" />
-    <Compile Include="Converters\BaseValueConverter.cs" />
+    <Compile Include="Converters\BaseMultiValueConverter.cs" />
+    <Compile Include="Converters\BaseSingleValueConverter.cs" />
+    <Compile Include="Converters\MultipleCommandParameterConverter.cs" />
     <Compile Include="Models\AppPage.cs" />
     <Compile Include="Models\FileSettings.cs" />
     <Compile Include="Models\NoteGroup.cs" />
@@ -195,11 +197,20 @@
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
-    <Compile Include="Views\MainPage.xaml.cs">
+    <Compile Include="Views\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsPage.xaml.cs">
+    <Compile Include="Views\Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\FilePanelControl.xaml.cs">
+      <DependentUpon>FilePanelControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\NoteGroupControl.xaml.cs">
+      <DependentUpon>NoteGroupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\NoteItemControl.xaml.cs">
+      <DependentUpon>NoteItemControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -225,11 +236,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainPage.xaml">
+    <Page Include="Views\Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SettingsPage.xaml">
+    <Page Include="Views\Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\FilePanelControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\NoteGroupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\NoteItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -257,6 +280,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Styles\Fonts\FontAwesome.otf" />
     <Resource Include="Resources\Styles\Fonts\IBMPlexSans-Bold.ttf" />
     <Resource Include="Resources\Styles\Fonts\IBMPlexSans-BoldItalic.ttf" />
     <Resource Include="Resources\Styles\Fonts\IBMPlexSans-ExtraLight.ttf" />
@@ -273,14 +297,20 @@
     <Resource Include="Resources\Styles\Fonts\IBMPlexSans-TextItalic.ttf" />
     <Resource Include="Resources\Styles\Fonts\IBMPlexSans-Thin.ttf" />
     <Resource Include="Resources\Styles\Fonts\IBMPlexSans-ThinItalic.ttf" />
-    <None Include="ToDoApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <FileAssociation Include=".todo">
+      <Visible>False</Visible>
+      <Description>todo file extension.</Description>
+      <Progid>todo</Progid>
+      <DefaultIcon>Resources\Files\fileicon.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -294,6 +324,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="fileicon-2.png" />
+    <Content Include="Resources\Files\fileicon.ico" />
+    <Resource Include="fileicon.ico" />
     <Content Include="Resources\Files\fileicon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -303,22 +336,12 @@
   <ItemGroup>
     <PublishFile Include="PropertyChanged">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="System.Windows.Interactivity">
-      <Visible>False</Visible>
       <PublishState>Include</PublishState>
       <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

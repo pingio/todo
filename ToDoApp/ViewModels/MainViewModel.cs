@@ -4,12 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 
 namespace ToDoApp
 {
@@ -19,7 +14,6 @@ namespace ToDoApp
 		#region Constructor
 
 		private bool canExecute;
-		private ObservableCollection<NoteGroup> noteGroups;
 		private Dictionary<string, NoteGroup> noteGroupKeys;
 
 
@@ -28,9 +22,8 @@ namespace ToDoApp
 			canExecute = true;
 
 			noteGroupKeys = new Dictionary<string, NoteGroup>();
-			noteGroups = new ObservableCollection<NoteGroup>();
 
-			NoteGroups = noteGroups;
+			NoteGroups = new ObservableCollection<NoteGroup>();
 
 			LoadText();
 		}
@@ -200,8 +193,30 @@ namespace ToDoApp
 		private void AddNoteItemCommand(object param)
 		{
 			var noteGroup = GetNoteGroup(param.ToString());
+			noteGroup.AddNoteItem(new NoteItem(""));
+		}
 
-			noteGroup.AddNoteItem(new NoteItem("Hello."));
+		#endregion
+
+		#region RemoveNoteItemButton
+
+		private ICommand removeNoteItemButton;
+		public ICommand RemoveNoteItemButton
+		{
+			get
+			{
+				return removeNoteItemButton ?? (removeNoteItemButton = new RelayCommand(param => RemoveNoteItemCommand(param), canExecute));
+			}
+		}
+
+		private void RemoveNoteItemCommand(object param)
+		{
+			var values = (object[])param;
+
+			var noteGroup = GetNoteGroup(values[0].ToString());
+			noteGroup.RemoveNoteItem(values[1].ToString());
+
+
 		}
 
 		#endregion
@@ -243,7 +258,6 @@ namespace ToDoApp
 		private void SaveText()
 		{
 			PropertyHandler.Instance.CurrentFile.NoteGroups = NoteGroups;
-			Debug.WriteLine(NoteGroups.Count);
 		}
 
 		public int FontSize => Properties.Settings.Default.FontSize;
@@ -251,7 +265,7 @@ namespace ToDoApp
 
 		public NoteGroup GetNoteGroup(string id)
 		{
-			return noteGroupKeys[id];
+			return NoteGroups.First(i => i.ID == noteGroupKeys[id].ID);
 		}
 		#endregion
 

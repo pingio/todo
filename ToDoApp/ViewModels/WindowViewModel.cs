@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace ToDoApp
 {
@@ -19,7 +14,8 @@ namespace ToDoApp
 		public static WindowViewModel Instance => instance ?? new WindowViewModel();
 		public AppPage CurrentPage { get; set; } = AppPage.Main;
 
-		public String CurrentTitle {
+		public String CurrentTitle
+		{
 			get
 			{
 				switch (CurrentPage)
@@ -33,7 +29,7 @@ namespace ToDoApp
 					default:
 						return "Todo App";
 				}
-				
+
 			}
 
 		}
