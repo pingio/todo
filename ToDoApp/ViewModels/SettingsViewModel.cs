@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Input;
 
 namespace ToDoApp
 {
-    class SettingsViewModel : BaseViewModel
-    {
+	class SettingsViewModel : BaseViewModel
+	{
 		#region private fields
 		private bool canExecute = true;
 		#endregion
@@ -21,7 +20,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return mainPageButton ?? (mainPageButton = new RelayCommand(() => MainPageButtonCommand(), canExecute));
+				return mainPageButton ?? (mainPageButton = new RelayCommand(param => MainPageButtonCommand(), canExecute));
 			}
 		}
 
@@ -41,7 +40,7 @@ namespace ToDoApp
 		{
 			get
 			{
-				return saveSettingsButton ?? (saveSettingsButton = new RelayCommand(() => SaveSettingsButtonCommand(), canExecute));
+				return saveSettingsButton ?? (saveSettingsButton = new RelayCommand(param => SaveSettingsButtonCommand(), canExecute));
 			}
 		}
 

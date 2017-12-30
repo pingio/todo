@@ -10,7 +10,7 @@ namespace ToDoApp
 	public partial class App : Application
 	{
 		private void Application_Startup(object sender, StartupEventArgs e)
-		{ 
+		{
 			if (AppDomain.CurrentDomain.SetupInformation.ActivationArguments != null
 				&& AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData != null
 				&& AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData.Length > 0)
@@ -25,7 +25,7 @@ namespace ToDoApp
 				PropertyHandler.Instance.CurrentFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\new file.todo";
 				PropertyHandler.Instance.CurrentFile = new LoadHandler(PropertyHandler.Instance.CurrentFilePath).NewFile();
 			}
-		
-	}
+
+		}
 	}
 }

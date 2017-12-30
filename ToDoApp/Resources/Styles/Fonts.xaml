@@ -3,31 +3,34 @@
                     xmlns:local="clr-namespace:ToDoApp">
 	<FontFamily x:Key="PlexMedium">pack://application;,,,/Resources/Styles/Fonts/#IBM Plex Sans Light</FontFamily>
 	<FontFamily x:Key="PlexBold">pack://application;,,,/Resources/Styles/Fonts/#IBM Plex Sans</FontFamily>
+	<FontFamily x:Key="FontAwesome">pack://application;,,,/Resources/Styles/Fonts/FontAwesome.otf#FontAwesome</FontFamily>
 
 	<Style TargetType="{x:Type Control}" x:Key="BaseStyle">
 		<Setter Property="FontFamily" Value="{StaticResource PlexMedium}" />
 		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="{StaticResource FontDarkColourBrush}"/>
 	</Style>
 
 	<Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
 		<Setter Property="FontFamily" Value="{StaticResource PlexMedium}" />
 		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="{StaticResource FontDarkColourBrush}"/>
 	</Style>
 
 	<Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource BaseStyle}">
 		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="{StaticResource FontDarkColourBrush}"/>
 	</Style>
 
 	<Style TargetType="{x:Type Label}">
 		<Setter Property="FontFamily" Value="{StaticResource PlexBold}"/>
 		<Setter Property="FontWeight" Value="Bold"/>
+		<Setter Property="Foreground" Value="{StaticResource FontDarkColourBrush}"/>
 	</Style>
 
 
 	<Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}"/>
 	<Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}"/>
-	<Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}"/>
 	<Style TargetType="{x:Type ListView}" BasedOn="{StaticResource BaseStyle}"/>
-	
 
 </ResourceDictionary>

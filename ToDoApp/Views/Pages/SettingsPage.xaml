@@ -20,12 +20,12 @@
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="40"/>
 				</Grid.RowDefinitions>
-				<TextBlock Grid.Row="0" Style="{StaticResource Header}" Text="Settings"/>
+				<TextBox IsReadOnly="True" Grid.Row="0" Style="{StaticResource Header}" Text="Settings"/>
 				<StackPanel Grid.Row="1">
 					<Label FontSize="16" Content="List Font Size"/>
 					<ComboBox ItemsSource="{Binding FontSizeList}" SelectedItem="{Binding FontSizeSelected}" HorizontalAlignment="Left" Margin="20 0 0 0" IsReadOnly="True"/>
 				</StackPanel>
-				
+
 				<StackPanel HorizontalAlignment="Right" Grid.Row="2" Orientation="Horizontal">
 					<Button Content="{Binding SaveSettingsButtonText, FallbackValue='Save Settings'}" x:Name="SaveButton" Style="{StaticResource SaveButton}" Command="{Binding SaveSettingsButton}"/>
 					<Button Content="{Binding MainPageButtonText, FallbackValue='Main Page'}" x:Name="MainPageButton" Style="{StaticResource Button}" Command="{Binding MainPageButton}"/>

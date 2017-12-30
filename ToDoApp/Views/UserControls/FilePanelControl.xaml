@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="ToDoApp.FilePanelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToDoApp"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="970">
+	<Border BorderBrush="#FFC5C5C5" BorderThickness="0 1 0 0">
+		<Grid Grid.Row="1" Background="{StaticResource BackgroundLightThemeColourBrush}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="270"/>
+			</Grid.ColumnDefinitions>
+
+
+			<DockPanel Grid.Column="0" Margin="5 0 0 0">
+				<TextBlock MaxHeight="25" Padding="2.5" Text="Path:" VerticalAlignment="Center"/>
+				<TextBox IsEnabled="False" Height="25" Padding="2.5" Margin="5 0 8 0" VerticalContentAlignment="Center" Text="{Binding PathText, Mode=OneWay, FallbackValue='Test'}"/>
+			</DockPanel>
+			<DockPanel Margin="0 0 5 0" Grid.Column="1" LastChildFill="False" HorizontalAlignment="Left">
+				<Button Content="{Binding OpenButtonText, FallbackValue='Open..'}" x:Name="OpenButton" Style="{StaticResource Button}" Command="{Binding OpenButton}"/>
+				<Button Content="{Binding SaveAsButtonText, FallbackValue='Save as..'}" x:Name="SaveAsButton" Style="{StaticResource SaveButton}" Command="{Binding SaveAsButton}"/>
+				<Button Content="{Binding SaveButtonText, FallbackValue='Save'}" x:Name="SaveButton" Style="{StaticResource SaveButton}" Command="{Binding SaveButton}"/>
+				<Button Content="{Binding SettingsButtonText, FallbackValue='Settings'}" x:Name="SettingsButton" Style="{StaticResource Button}" Command="{Binding SettingsButton}"/>
+			</DockPanel>
+		</Grid>
+	</Border>
+</UserControl>

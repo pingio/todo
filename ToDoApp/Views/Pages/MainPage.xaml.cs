@@ -1,5 +1,4 @@
-﻿using ToDoApp;
-using System.Windows;
+﻿using System.Diagnostics;
 using System.Windows.Controls;
 
 namespace ToDoApp
@@ -11,8 +10,10 @@ namespace ToDoApp
 	{
 		public MainPage()
 		{
-			this.DataContext = new MainViewModel();
+			var mwm = new MainViewModel();
+			this.DataContext = mwm;
 			InitializeComponent();
 		}
+
 	}
 }
