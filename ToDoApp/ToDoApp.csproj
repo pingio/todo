@@ -26,9 +26,9 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>0.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -306,7 +306,7 @@
   <ItemGroup>
     <FileAssociation Include=".todo">
       <Visible>False</Visible>
-      <Description>todo file extension.</Description>
+      <Description>todo file.</Description>
       <Progid>todo</Progid>
       <DefaultIcon>Resources\Files\fileicon.ico</DefaultIcon>
     </FileAssociation>
