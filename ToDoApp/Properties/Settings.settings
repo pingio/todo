@@ -5,5 +5,8 @@
     <Setting Name="FontSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">14</Value>
     </Setting>
+    <Setting Name="UpdateUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://api.github.com/repos/pingio/todo/releases</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

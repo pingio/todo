@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<!--#region TextBox-->
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					>
+	
+	<!--#region Input-->
 	<Style x:Key="Input" TargetType="{x:Type TextBox}"  BasedOn="{StaticResource BaseStyle}">
 		<Setter Property="VerticalAlignment" Value="Stretch"/>
 		<Setter Property="AcceptsReturn" Value="True"/>
@@ -10,7 +12,8 @@
 		<Setter Property="Background" Value="Transparent"/>
 	</Style>
 	<!--#endregion-->
-	<!--#region TextBlock-->
+	
+	<!--#region Header-->
 	<Style x:Key="Header" TargetType="{x:Type TextBox}"  BasedOn="{StaticResource BaseStyle}">
 		<Setter Property="HorizontalAlignment" Value="Center"/>
 		<Setter Property="FontSize" Value="24"/>
@@ -27,6 +30,16 @@
 				<Setter Property="BorderBrush" Value="Transparent"/>
 			</Trigger>
 		</Style.Triggers>
+	</Style>
+	<!--#endregion-->
+
+	<!--#region HeaderBlock-->
+	<Style x:Key="HeaderBlock" TargetType="{x:Type TextBlock}"  BasedOn="{StaticResource BaseTextBlockStyle}">
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="FontSize" Value="24"/>
+		<Setter Property="FontStyle" Value="Normal"/>
+		<Setter Property="FontWeight" Value="ExtraLight"/>
+		<Setter Property="Background" Value="Transparent"/>
 	</Style>
 	<!--#endregion-->
 
@@ -139,6 +152,30 @@
 	</Style>
 
 	<!--#endregion-->
+	
+	<!--#region UpdateBorder-->
+	<Style TargetType="{x:Type Border}" x:Key="UpdateBorder">
+		<Setter  Property="Background" Value="{StaticResource BackgroundLightThemeColourBrush}"/>
+		<Setter Property="CornerRadius" Value="30"/>
+		<Setter Property="Height" Value="65"/>
+		<Setter Property="Width" Value="350"/>
+
+	</Style>
+
+	<!--#region UpdateBorder-->
+	<Style TargetType="{x:Type Button}" x:Key="UpdateLink">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border Style="{StaticResource UpdateBorder}">
+						<ContentPresenter/>
+					</Border>
+
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+
+	</Style>
 
 
 </ResourceDictionary>

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Diagnostics;
 using System.Windows;
 
 namespace ToDoApp
@@ -20,12 +21,16 @@ namespace ToDoApp
 				PropertyHandler.Instance.CurrentFilePath = uri.LocalPath;
 				PropertyHandler.Instance.CurrentFile = new LoadHandler(PropertyHandler.Instance.CurrentFilePath).LoadFile();
 			}
+			else if (e.Args.Length > 0)
+			{
+				PropertyHandler.Instance.CurrentFilePath = e.Args[0];
+				PropertyHandler.Instance.CurrentFile = new LoadHandler(PropertyHandler.Instance.CurrentFilePath).LoadFile();
+			}
 			else
 			{
 				PropertyHandler.Instance.CurrentFilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\new file.todo";
 				PropertyHandler.Instance.CurrentFile = new LoadHandler(PropertyHandler.Instance.CurrentFilePath).NewFile();
 			}
-
 		}
 	}
 }
