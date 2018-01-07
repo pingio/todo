@@ -309,9 +309,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LICENSE.rtf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <Resource Include="fileicon-2.png" />
     <Content Include="Resources\Files\fileicon.ico" />
     <Resource Include="fileicon.ico" />
