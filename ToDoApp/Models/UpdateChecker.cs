@@ -2,6 +2,7 @@
 using System;
 using System.Net;
 using System.Reflection;
+using System.Windows;
 
 namespace ToDoApp
 {
@@ -9,38 +10,43 @@ namespace ToDoApp
 	{
 		public bool HasUpdate()
 		{
-			var hasUpdate = false;
-
+			bool hasUpdate = false;
 			using (WebClient client = new WebClient())
 			{
-				client.Headers["User-Agent"] = "Kaban Update Checker";
-				client.Headers["Host"] = "github.com/pingio/todo";
+				try
+				{
 
-				var url = Properties.Settings.Default.UpdateUrl;
+					client.Headers.Add(HttpRequestHeader.UserAgent, "Kanban update checker");
 
-				client.DownloadStringAsync(new Uri(url));
+					var url = Properties.Settings.Default.UpdateUrl;
 
-				client.DownloadStringCompleted += (sender, e) =>
-			   {
-				   var jsonContent = e.Result;
+					client.DownloadStringAsync(new Uri(url));
+					client.DownloadStringCompleted += (sender, e) =>
+				   {
+					   var jsonContent = e.Result;
 
-				   JArray arrayItems = JArray.Parse(jsonContent);
+					   JArray arrayItems = JArray.Parse(jsonContent);
 
-				   var latestRelease = arrayItems[0];
+					   var latestRelease = arrayItems[0];
 
-				   var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+					   var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-				   var newVersion = new Version(latestRelease["tag_name"].ToString());
+					   var newVersion = new Version(latestRelease["tag_name"].ToString());
 
-				   var result = currentVersion.CompareTo(newVersion);
+					   var result = currentVersion.CompareTo(newVersion);
 
-				   if (result < 0)
-					   hasUpdate = true;
-			   };
+					   if (result < 0)
+						   hasUpdate = true;
+				   };
+				}
+				catch(WebException e)
+				{
+					MessageBox.Show(e.Message);
+				}
 
 			}
-
 			return hasUpdate;
+
 		}
 	}
 }
