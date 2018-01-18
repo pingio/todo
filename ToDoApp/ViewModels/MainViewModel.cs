@@ -98,7 +98,7 @@ namespace ToDoApp
 			SaveFileDialog fileDialog = new SaveFileDialog();
 			fileDialog.Filter = "ToDo files (*.todo)|*.todo|All files (*.*)|*.*";
 
-			fileDialog.FileName = "My new todo file";
+			fileDialog.FileName = "new file";
 			fileDialog.AddExtension = true;
 			fileDialog.DefaultExt = ".todo";
 
@@ -222,6 +222,46 @@ namespace ToDoApp
 		#endregion
 
 		#endregion
+
+		#region OpenButton
+
+		#region UpdateLink
+		private ICommand updateLink;
+		public ICommand UpdateLink
+		{
+			get
+			{
+				return updateLink ?? (updateLink = new RelayCommand(param => UpdateLinkCommand(), canExecute));
+			}
+		}
+		
+
+		private void UpdateLinkCommand()
+		{
+			System.Diagnostics.Process.Start("https://github.com/pingio/todo/releases");
+			ShowUpdateLink = false;
+		}
+
+		private bool ShowUpdateLink { get; set; } = true;
+
+		#endregion
+
+		private ICommand hideUpdateLink;
+		public ICommand HideUpdateLink
+		{
+			get
+			{
+				return hideUpdateLink ?? (hideUpdateLink = new RelayCommand(param => HideUpdateLinkCommand(), canExecute));
+			}
+		}
+
+
+		private void HideUpdateLinkCommand()
+		{
+			ShowUpdateLink = false;
+		}
+		#endregion
+
 
 		#endregion
 

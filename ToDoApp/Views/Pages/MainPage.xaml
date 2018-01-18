@@ -10,19 +10,21 @@
       Title="TodoApp" Background="White"
 	  >
 
+
 	<DockPanel>
 		<Border BorderBrush="#FFC5C5C5" BorderThickness="0 1 0 0">
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="40"/>
-			</Grid.RowDefinitions>
-			<Grid Grid.Row="0" Margin="5">
-					<local:NoteGroupControl/>
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="40"/>
+				</Grid.RowDefinitions>
+				<Grid Grid.Row="0" Margin="5">
 
+					<local:NotifyUpdateControl Panel.ZIndex="2" VerticalAlignment="Top" Margin="0 -80 0 0" />
+					<local:NoteGroupControl/>
 					<!-- footer-->
-				
-			</Grid>
+
+				</Grid>
 				<local:FilePanelControl Grid.Row="1" />
 			</Grid>
 		</Border>
