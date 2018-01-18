@@ -2,7 +2,6 @@
 using System;
 using System.Net;
 using System.Reflection;
-using System.Windows;
 
 namespace ToDoApp
 {
@@ -41,7 +40,7 @@ namespace ToDoApp
 				}
 				catch(WebException e)
 				{
-					MessageBox.Show(e.Message);
+					//TODO: Log file.
 				}
 
 			}
