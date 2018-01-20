@@ -16,10 +16,7 @@ namespace ToDoApp
 
 		public event EventHandler CanExecuteChanged = (sender, e) => { };
 
-		public bool CanExecute(object parameter)
-		{
-			return canExecute;
-		}
+		public bool CanExecute(object parameter) => canExecute;
 
 		public void Execute(object parameter) => this.action(parameter);
 	}

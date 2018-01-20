@@ -14,6 +14,9 @@ namespace ToDoApp
 		public static WindowViewModel Instance => instance ?? new WindowViewModel();
 		public AppPage CurrentPage { get; set; } = AppPage.Main;
 
+		/// <summary>
+		/// Selects the current window title
+		/// </summary>
 		public String CurrentTitle
 		{
 			get
@@ -29,12 +32,8 @@ namespace ToDoApp
 					default:
 						return "Todo App";
 				}
-
 			}
-
 		}
-
-
 		#endregion
 	}
 }

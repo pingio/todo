@@ -16,34 +16,31 @@ namespace ToDoApp
 		public String MainPageButtonText { get; set; } = "Back to Main Page.";
 
 		private ICommand mainPageButton;
-		public ICommand MainPageButton
-		{
-			get
-			{
-				return mainPageButton ?? (mainPageButton = new RelayCommand(param => MainPageButtonCommand(), canExecute));
-			}
-		}
+		/// <summary>
+		/// <see cref="MainPageButtonCommand"/>
+		/// </summary>
+		public ICommand MainPageButton => mainPageButton ?? (mainPageButton = new RelayCommand(param => MainPageButtonCommand(), canExecute));
 
-		private void MainPageButtonCommand()
-		{
-
-			WindowViewModel.Instance.CurrentPage = AppPage.Main;
-		}
+		/// <summary>
+		/// Changes view to main view
+		/// </summary>
+		private void MainPageButtonCommand => WindowViewModel.Instance.CurrentPage = AppPage.Main;
 		#endregion
 
 		#region SaveSettingsButton
 
 		public String SaveSettingsButtonText { get; set; } = "Save Settings";
-
 		private ICommand saveSettingsButton;
-		public ICommand SaveSettingsButton
-		{
-			get
-			{
-				return saveSettingsButton ?? (saveSettingsButton = new RelayCommand(param => SaveSettingsButtonCommand(), canExecute));
-			}
-		}
 
+		/// <summary>
+		/// <see cref="SaveSettingsButtonCommand"/>
+		/// </summary>
+		public ICommand SaveSettingsButton =>
+			saveSettingsButton ?? (saveSettingsButton = new RelayCommand(param => SaveSettingsButtonCommand(), canExecute));
+		
+		/// <summary>
+		/// Saves the settings as set in the view.
+		/// </summary>
 		private void SaveSettingsButtonCommand()
 		{
 			Properties.Settings.Default.FontSize = FontSizeSelected;
@@ -58,6 +55,9 @@ namespace ToDoApp
 		#region Settings options
 		public int FontSizeSelected { get; set; } = Properties.Settings.Default.FontSize;
 
+		/// <summary>
+		/// Shows the list of available font sizes.
+		/// </summary>
 		public IEnumerable<Int32> FontSizeList
 		{
 			get
