@@ -58,7 +58,7 @@ namespace ToDoApp
 			OpenFileDialog fileDialog = new OpenFileDialog();
 			fileDialog.Filter = "ToDo files (*.todo)|*.todo|All files (*.*)|*.*";
 
-			if (fileDialog.ShowDialog())
+			if (fileDialog.ShowDialog() == true)
 			{
 				UpdateContent(fileDialog.FileName);
 			}
@@ -108,7 +108,7 @@ namespace ToDoApp
 			fileDialog.DefaultExt = ".todo";
 
 
-			if (fileDialog.ShowDialog())
+			if (fileDialog.ShowDialog() == true)
 			{
 				SaveText();
 				bool isSaved = new SaveHandler(PropertyHandler.Instance.CurrentFile).Save(fileDialog.FileName);
@@ -256,7 +256,7 @@ namespace ToDoApp
 		private ICommand hideUpdateLink;
 		public ICommand HideUpdateLink => hideUpdateLink ?? (hideUpdateLink = new RelayCommand(param => HideUpdateLinkCommand(), canExecute));
 
-		private void HideUpdateLinkCommand => ShowUpdateLink = false;
+		private void HideUpdateLinkCommand () => ShowUpdateLink = false;
 		#endregion
 
 		#endregion

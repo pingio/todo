@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace ToDoApp
 {
-	static class FileLogHandler : ILogger
+	class FileLogHandler : ILogger
 	{
+		public FileLogHandler()
+		{
+		}
+
 		public async Task LogMessage(string str)
 		{
-			
+			await Task.Delay(0);
 		}
 	}
 }

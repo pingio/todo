@@ -24,7 +24,7 @@ namespace ToDoApp
 		/// <summary>
 		/// Changes view to main view
 		/// </summary>
-		private void MainPageButtonCommand => WindowViewModel.Instance.CurrentPage = AppPage.Main;
+		private void MainPageButtonCommand () => WindowViewModel.Instance.CurrentPage = AppPage.Main;
 		#endregion
 
 		#region SaveSettingsButton
