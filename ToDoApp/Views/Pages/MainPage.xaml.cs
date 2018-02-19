@@ -12,8 +12,9 @@ namespace ToDoApp
 		{
 			var mwm = new MainViewModel();
 			this.DataContext = mwm;
+
+			WindowViewModel.Instance.CurrentViewModel = mwm;
 			InitializeComponent();
 		}
-
 	}
 }

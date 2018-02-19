@@ -14,6 +14,8 @@ namespace ToDoApp
 		public static WindowViewModel Instance => instance ?? new WindowViewModel();
 		public AppPage CurrentPage { get; set; } = AppPage.Main;
 
+		public BaseViewModel CurrentViewModel { get; set; }
+
 		/// <summary>
 		/// Selects the current window title
 		/// </summary>

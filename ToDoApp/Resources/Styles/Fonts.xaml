@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:ToDoApp">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:local="clr-namespace:ToDoApp">
 	<FontFamily x:Key="PlexMedium">pack://application;,,,/Resources/Styles/Fonts/#IBM Plex Sans Light</FontFamily>
 	<FontFamily x:Key="PlexBold">pack://application;,,,/Resources/Styles/Fonts/#IBM Plex Sans</FontFamily>
 	<FontFamily x:Key="FontAwesome">pack://application;,,,/Resources/Styles/Fonts/FontAwesome.otf#FontAwesome</FontFamily>

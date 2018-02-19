@@ -12,6 +12,8 @@ namespace ToDoApp
 		{
 			var swm = new SettingsViewModel();
 			this.DataContext = swm;
+
+			WindowViewModel.Instance.CurrentViewModel = swm;
 			InitializeComponent();
 		}
 	}

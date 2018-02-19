@@ -170,7 +170,7 @@ namespace ToDoApp
 		/// <summary>
 		/// <see cref="RemoveNoteGroupCommand(object)"/>
 		/// </summary>
-		public ICommand RemoveNoteGroupButton => 
+		public ICommand RemoveNoteGroupButton =>
 			removeNoteGroupButton ?? (removeNoteGroupButton = new RelayCommand(param => RemoveNoteGroupCommand(param), canExecute));
 
 		/// <summary>
@@ -199,10 +199,24 @@ namespace ToDoApp
 		/// Add a note item to the note group
 		/// </summary>
 		/// <param name="param">The command parameter from the view, will be the ID of the note group the item belongs in</param>
-		private void AddNoteItemCommand(object param)
+		public void AddNoteItemCommand(object param)
 		{
-			var noteGroup = GetNoteGroup(param.ToString());
-			noteGroup.AddNoteItem(new NoteItem(""));
+
+
+			if (param.GetType() == typeof(object[]))
+			{
+				var para = (object[])param;
+				var noteGroup = GetNoteGroup(para[0].ToString());
+
+				noteGroup.AddNoteItem(new NoteItem((string)para[1].ToString()));
+			}
+			else
+			{
+				var noteGroup = GetNoteGroup(param.ToString());
+
+				noteGroup.AddNoteItem(new NoteItem(""));
+
+			}
 		}
 
 		#endregion
@@ -222,7 +236,7 @@ namespace ToDoApp
 		/// <param name="param">The command parameters from the view.
 		/// param[0] will be the note group and param[1] will be the noteitem
 		/// </param>
-		private void RemoveNoteItemCommand(object param)
+		public void RemoveNoteItemCommand(object param)
 		{
 			var values = (object[])param;
 
@@ -256,7 +270,7 @@ namespace ToDoApp
 		private ICommand hideUpdateLink;
 		public ICommand HideUpdateLink => hideUpdateLink ?? (hideUpdateLink = new RelayCommand(param => HideUpdateLinkCommand(), canExecute));
 
-		private void HideUpdateLinkCommand () => ShowUpdateLink = false;
+		private void HideUpdateLinkCommand() => ShowUpdateLink = false;
 		#endregion
 
 		#endregion
@@ -305,7 +319,9 @@ namespace ToDoApp
 		public int FontSize => Properties.Settings.Default.FontSize;
 
 
-		private NoteGroup GetNoteGroup(string id) => NoteGroups.First(i => i.ID == noteGroupKeys[id].ID);
+		public NoteGroup GetNoteGroup(string id) => NoteGroups.FirstOrDefault(i => i.ID == noteGroupKeys[id].ID);
+
+
 		#endregion
 
 	}
